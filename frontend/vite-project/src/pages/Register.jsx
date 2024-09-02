@@ -3,10 +3,13 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 axios.defaults.withCredentials = true;
+import io from 'socket.io-client';
+
+const socket = io('http://localhost:8000');
 
 const Register = () => {
   const navigate = useNavigate()
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState({  
     name: '',
     email: '',
     password: '',
@@ -33,8 +36,9 @@ const Register = () => {
       });
       console.log('Register created successfully:', response);
       setload(false)
-      alert("signup suceessfully")
-      navigate('/login')
+      // alert("signup suceessfully")
+      // navigate('/login')
+      socket.emit("new_user_register", { message: `New user registered: ${formData.email}` });
 
     } catch (error) {
       

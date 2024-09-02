@@ -14,6 +14,7 @@
     "multer-storage-cloudinary": "^4.0.0",
     "nodemailer": "^6.9.14",
     "nodemon": "^3.1.4",
+    "socket.io": "^4.7.5",
     "zod": "^3.23.8"
   },
   "name": "aceesstoken",

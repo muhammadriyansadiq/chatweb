@@ -10,8 +10,6 @@ const handleregister = async (req, res) => {
     const { name, email, password, photo  } = req.body;
     console.log("Uploaded file:", req?.file);
 
-   
-
 try{
      let usrdata = await User.findOne({ email: email });
       if (usrdata) {
@@ -36,6 +34,9 @@ try{
           photo: photo
 
         });
+
+        req.io.emit('new_signup', { email: payload.email });
+
 
         return res.json({ msg: payload});
 

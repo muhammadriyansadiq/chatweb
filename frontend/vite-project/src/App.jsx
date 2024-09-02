@@ -12,6 +12,7 @@ import {jwtDecode} from 'jwt-decode';
 import Userdashboard from './pages/Userdashboard.jsx';
 import PublicRoute from './Utils/publicroute.jsx';
 import ProtectedRoute from './Utils/ProtectedRoute.jsx';
+import Chating from './pages/Chating.jsx';
 
 // import MyProvider from './Utils/Provider.jsx';
 // import ProtectRoute from './Utils/ProtectRoute.jsx';
@@ -23,8 +24,11 @@ function App() {
 useEffect(()=>{
 const token = localStorage.getItem("token")
 settoken(token)
+if(token){
 const decoded = jwtDecode(token);
 setrole(decoded.role)
+}
+
 },[])
 console.log("roles",role)
   return (
@@ -38,6 +42,7 @@ console.log("roles",role)
 <Route path='/forgetpassword' element={  < Forgetpassword />} /> 
 <Route path='/forgetpasswordseted/:token' element={  < Forgetpasswordseted />} /> 
 <Route path='/changepassword' element={  < Changepassword />} /> 
+<Route path='/chatting' element={  < Chating />} /> 
 
 <Route path='/' element={  < Home />} /> 
 
@@ -60,33 +65,42 @@ console.log("roles",role)
         )}
       </Route> */}
 
-<Route 
+{/* <Route 
           path='/register' 
           element={
             <PublicRoute>
               <Register />
             </PublicRoute>
           } 
-        />
-        <Route 
+        /> */}
+<Route path='/register' element={  < Register />} /> 
+
+
+        {/* <Route 
           path='/login' 
           element={
             <PublicRoute>
               <Login />
             </PublicRoute>
           } 
-        />
+        /> */}
+<Route path='/login' element={  < Login />} /> 
+
+
 
 {/* <Route path='/dashboard' element={token?(role === "admin"?  < AdminHome />:<Userdashboard />):(<Login />)} />  */}
  {/* Protected Route for Admin */}
- <Route
+ {/* <Route
           path='/admindashboard'
           element={
             <ProtectedRoute requiredRole="admin">
               <AdminHome />
             </ProtectedRoute>
           }
-        />
+        /> */}
+
+<Route path='/admindashboard' element={  < AdminHome />} /> 
+
 
         {/* Protected Route for User */}
         <Route
